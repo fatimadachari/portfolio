@@ -184,7 +184,7 @@ export default function Portfolio() {
             </p>
             
             <div className="flex gap-4">
-              <SocialLink href="https://github.com/fatima-dachari" icon={<Github size={24} />} />
+              <SocialLink href="https://github.com/fatimadachari" icon={<Github size={24} />} />
               <SocialLink href="https://www.linkedin.com/in/fatima-dachari" icon={<Linkedin size={24} />} />
               <SocialLink href="mailto:fatima.s.dachari@gmail.com" icon={<Mail size={24} />} />
             </div>
