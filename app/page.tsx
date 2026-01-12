@@ -107,6 +107,15 @@ const projects = [
     repoUrl: "https://github.com/fatimadachari/CorpExpense",
     deployUrl: null, 
   },
+  {
+    id: 5,
+    title: "CryptoTrend Predictor",
+    category: "Dados",
+    description: "Módulo de ML para previsão de preços de Bitcoin utilizando séries temporais e análise de volatilidade.",
+    tech: ["Python", "Prophet", "Plotly", "Pandas", "YFinance"],
+    repoUrl: "https://github.com/fatimadachari/crypto-trend-predictor",
+    deployUrl: null, 
+  },
 ];
 
 const softSkills = [
