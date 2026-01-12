@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio | Fátima Dachari
 
-## Getting Started
+![Project Status](https://img.shields.io/badge/status-concluído-green?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer-motion-black?style=for-the-badge&logo=framer&logoColor=blue)
 
-First, run the development server:
+Este repositório contém o código-fonte do meu portfólio pessoal. O projeto foi desenvolvido para demonstrar minha trajetória na **Engenharia de Software** e **Ciência de Dados**, unindo um design minimalista e tecnológico com alta performance.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tecnologias Utilizadas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O projeto foi construído utilizando as tecnologias mais modernas do ecossistema React:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **[Next.js 14](https://nextjs.org/)** - Framework React (App Router).
+- **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática para maior segurança.
+- **[Tailwind CSS](https://tailwindcss.com/)** - Estilização utility-first rápida e responsiva.
+- **[Framer Motion](https://www.framer.com/motion/)** - Biblioteca para animações fluídas e complexas.
+- **[Lucide React](https://lucide.dev/)** - Ícones leves e customizáveis.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Funcionalidades
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Design Responsivo:** Layout fluido que se adapta perfeitamente do Mobile ao Desktop.
+- **Animações Interativas:** Elementos com entrada suave (fade-in), hover effects e cards flutuantes.
+- **Filtro de Projetos:** Sistema dinâmico para categorizar projetos (Front-end, Backend, Mobile, Dados).
+- **Linha do Tempo:** Visualização elegante da experiência profissional.
+- **Integração de Contato:** Botões diretos para WhatsApp (API), E-mail e Download de CV.

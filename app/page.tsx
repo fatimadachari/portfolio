@@ -2,49 +2,148 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Linkedin, Mail, Code2, Database, Smartphone, Layout } from "lucide-react";
+import { 
+  Github, ExternalLink, Linkedin, Mail, 
+  Code2, Database, Smartphone, Layout, 
+  Calendar, GraduationCap, Award, 
+  HeartHandshake, LineChart, Globe,
+  Terminal, Palette, Download, Send,  Container, 
+  RefreshCw, Triangle, TrainFront 
+} from "lucide-react";
 
-// --- DADOS DOS PROJETOS (Baseado no seu CV) ---
-const projects = [
+const experience = [
   {
     id: 1,
-    title: "Reescrita App Mobile .NET MAUI",
-    category: "Mobile",
-    description: "Modernização completa de app legado Java para C#.NET MAUI com integração Zebra.",
-    tech: ["C#", ".NET MAUI", "Android"],
-    repoUrl: "https://github.com/fatima-dachari", // Coloque o link real depois
-    deployUrl: null, // Sem deploy web pois é mobile
+    company: "JCSx Sistemas",
+    role: "Desenvolvedora de Software",
+    period: "Jul 2024 - Atual",
+    description: "Liderança na reescrita completa de app legado para .NET MAUI e desenvolvimento de módulos fiscais/operacionais em React.js/Next.js. Atuação em QA e Customer Success.",
+    tech: [".NET MAUI", "C#", "React.js", "Zebra Integrations"]
   },
   {
     id: 2,
-    title: "Sistema de Gestão & NFPe",
-    category: "Front-end",
-    description: "Interface complexa para emissão de notas fiscais e gestão de ordens de serviço.",
-    tech: ["React.js", "Next.js", "TypeScript"],
-    repoUrl: "https://github.com/fatima-dachari",
-    deployUrl: "https://exemplo.com", 
+    company: "JCSx Sistemas",
+    role: "Estagiária",
+    period: "Jan 2024 - Jun 2024",
+    description: "Desenvolvimento de componentes reutilizáveis em React e manutenção de legado em Java. Prototipagem de alta fidelidade no Figma.",
+    tech: ["React.js", "Node.js", "Figma", "Java"]
   },
   {
     id: 3,
-    title: "To-Do List Fullstack",
-    category: "Fullstack",
-    description: "Gerenciador de tarefas completo com arquitetura MVC e banco de dados relacional.",
-    tech: ["React.js", "Node.js", "MySQL"],
-    repoUrl: "https://github.com/fatima-dachari",
-    deployUrl: "https://exemplo.com",
+    company: "Farol Software",
+    role: "Desenvolvedora de Software",
+    period: "Jan 2022 - Mar 2023",
+    description: "Modernização de sites com PHP Laravel e criação de App Corporativo de Ponto Eletrônico usando Nest.js e React.",
+    tech: ["PHP/Laravel", "Nest.js", "TypeScript", "MySQL"]
   },
   {
     id: 4,
-    title: "Análise de Dados com Python",
-    category: "Dados",
-    description: "Projeto de análise estatística e machine learning focado em insights preditivos.",
-    tech: ["Python", "Pandas", "Scikit-learn"],
-    repoUrl: "https://github.com/fatima-dachari",
-    deployUrl: null,
+    company: "Farol Software",
+    role: "Estagiária",
+    period: "Ago 2021 - Dez 2021",
+    description: "Criação de sistema de gerenciamento de tarefas (To-Do List) e suporte em PHP e banco de dados.",
+    tech: ["React.js", "Node.js", "PHP", "MySQL"]
   }
 ];
 
-// --- COMPONENTES ---
+const education = [
+  {
+    institution: "Estácio de Sá",
+    degree: "Bacharelado em Engenharia de Software",
+    period: "2024 - 2027 (Previsão)",
+  },
+  {
+    institution: "Estácio de Sá",
+    degree: "Tecnólogo em Ciência de Dados",
+    period: "2025 - 2027 (Previsão)",
+  },
+  {
+    institution: "Escola Técnica Estadual 25 de Julho",
+    degree: "Técnico em Informática",
+    period: "2019 - 2022",
+  }
+];
+
+const courses = [
+  { name: "C# (100h)", school: "Rocketseat", details: ".NET, API, DDD, Entity Framework, Azure" },
+  { name: "IA para Devs (30h)", school: "Rocketseat", details: "LLMs, RAG, AWS Bedrock, Prompt Engineering" },
+  { name: "Lógica de Programação (30h)", school: "Rocketseat", details: "Algoritmos, Estrutura de dados, Clean Code" },
+];
+
+const projects = [
+  {
+    id: 1,
+    title: "CryptoWatcher",
+    category: "Fullstack",
+    description: "Sistema de monitoramento de criptomoedas com alertas em tempo real.",
+    tech: ["React.js", ".NET", "Redis", "RabbitMQ", "SendGrid"],
+    repoUrl: "https://github.com/fatimadachari/CryptoWatcher", 
+    deployUrl: null, 
+  },
+  {
+    id: 2,
+    title: "NutriPlan",
+    category: "Fullstack",
+    description: "SaaS para nutricionistas: gerenciamento de pacientes, cálculo automático de dietas e geração de PDFs profissionais.",
+    tech: [".NET", "Next.js"],
+    repoUrl: "https://github.com/fatimadachari/NutriPlan",
+    deployUrl: null, 
+  },
+  {
+    id: 3,
+    title: "SmartCondo",
+    category: "Fullstack",
+    description: "Plataforma SaaS Full-stack para gestão inteligente de condomínios.",
+    tech: ["Next.js", "Nest.js", "Prisma", "PostgreSQL"],
+    repoUrl: "https://github.com/fatimadachari/smart-condo",
+    deployUrl: "https://smart-condo.vercel.app/",
+  },
+  {
+    id: 4,
+    title: "CorpExpense",
+    category: "Backend",
+    description: "API RESTful para gerenciamento de reembolsos corporativos.",
+    tech: [".NET", "SQLServer"],
+    repoUrl: "https://github.com/fatimadachari/CorpExpense",
+    deployUrl: null, 
+  },
+];
+
+const softSkills = [
+  {
+    title: "Modernização de Sistemas",
+    desc: "Expertise em transformar softwares legados em aplicações modernas, escaláveis e de alta performance.",
+    icon: <RefreshCw size={24} />
+  },
+  {
+    title: "Customer Success",
+    desc: "Criação de materiais educativos e onboarding para facilitar a adoção do sistema pelo cliente.",
+    icon: <HeartHandshake size={24} />
+  },
+  {
+    title: "Visão Analítica",
+    desc: "União da Engenharia de Software com Ciência de Dados para decisões baseadas em métricas.",
+    icon: <LineChart size={24} />
+  },
+  {
+    title: "Idiomas",
+    desc: "Português (Nativo) e Inglês (Leitura/Escuta Avançadas) para documentação e pesquisa.",
+    icon: <Globe size={24} />
+  }
+];
+
+const tools = [
+  { name: "Vercel", icon: <Triangle size={18} /> },
+  { name: "Railway", icon: <TrainFront size={18} /> },
+  { name: "Neon DB", icon: <Database size={18} /> },
+  { name: "MySQL", icon: <Database size={18} /> },
+  { name: "PostgreSQL", icon: <Database size={18} /> },
+  { name: "Docker", icon: <Container size={18} /> },
+  { name: "CI/CD", icon: <RefreshCw size={18} /> },
+  { name: "Figma", icon: <Palette size={18} /> },
+  { name: "Git/GitHub", icon: <Github size={18} /> },
+  { name: "Zebra Hardware", icon: <Smartphone size={18} /> },
+];
 
 const categories = ["Todos", "Front-end", "Backend", "Fullstack", "Mobile", "Dados"];
 
@@ -56,60 +155,160 @@ export default function Portfolio() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-cyan-500 selection:text-black font-sans">
+    <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-cyan-500 selection:text-black font-sans scroll-smooth overflow-x-hidden">
       
-      {/* Header / Hero Section */}
-      <header className="container mx-auto px-6 py-24 flex flex-col items-start justify-center min-h-[80vh]">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="text-cyan-400 tracking-widest font-mono mb-4">OLÁ, EU SOU</p>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight">
-            Fátima Dachari.
-          </h1>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-400 mb-8">
-            Engenharia de Software <br /> & Ciência de Dados.
-          </h2>
-          <p className="max-w-xl text-lg text-slate-400 leading-relaxed mb-10">
-            Desenvolvedora Full-Stack especializada em criar experiências digitais robustas. 
-            Unifico a precisão do <strong className="text-cyan-400">.NET e React</strong> com a inteligência da <strong className="text-cyan-400">Ciência de Dados</strong>.
-          </p>
+      {/* 1. Header / Hero Section */}
+      <header className="container mx-auto px-6 py-12 md:py-24 flex items-center min-h-[90vh]">
+        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
           
-          <div className="flex gap-4">
-            <a href="https://github.com/fatima-dachari" target="_blank" className="p-3 border border-slate-700 rounded-full hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300">
-              <Github size={24} />
-            </a>
-            <a href="https://www.linkedin.com/in/fatima-dachari" target="_blank" className="p-3 border border-slate-700 rounded-full hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300">
-              <Linkedin size={24} />
-            </a>
-            <a href="mailto:fatima.s.dachari@gmail.com" className="p-3 border border-slate-700 rounded-full hover:border-cyan-400 hover:text-cyan-400 transition-all duration-300">
-              <Mail size={24} />
-            </a>
-          </div>
-        </motion.div>
+          {/* Coluna de Texto (ESQUERDA) */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="order-2 md:order-1 text-left"
+          >
+            <p className="text-cyan-400 tracking-widest font-mono mb-4 flex items-center gap-2">
+              <span className="w-8 h-[1px] bg-cyan-400 inline-block"></span>
+              OLÁ, EU SOU
+            </p>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight leading-tight">
+              Fátima <br/> Dachari.
+            </h1>
+            <h2 className="text-2xl md:text-4xl font-bold text-slate-400 mb-8">
+              Engenharia de Software <br /> & Ciência de Dados.
+            </h2>
+            <p className="max-w-xl text-lg text-slate-400 leading-relaxed mb-10 border-l-2 border-slate-800 pl-6">
+              Desenvolvedora Full-Stack transformando ideias complexas em software de alto impacto. 
+              Construo ecossistemas digitais que unem uma engenharia sólida à inteligência estratégica de dados.
+            </p>
+            
+            <div className="flex gap-4">
+              <SocialLink href="https://github.com/fatima-dachari" icon={<Github size={24} />} />
+              <SocialLink href="https://www.linkedin.com/in/fatima-dachari" icon={<Linkedin size={24} />} />
+              <SocialLink href="mailto:fatima.s.dachari@gmail.com" icon={<Mail size={24} />} />
+            </div>
+          </motion.div>
+
+          {/* Coluna da Foto (DIREITA) */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="order-1 md:order-2 flex justify-center md:justify-end relative"
+          >
+             <motion.div
+               animate={{ y: [0, -15, 0] }}
+               transition={{ 
+                 duration: 6, 
+                 repeat: Infinity, 
+                 ease: "easeInOut" 
+               }}
+               className="relative"
+             >
+                {/* Efeito de Glow/Brilho */}
+                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full blur-2xl opacity-40"></div>
+                
+                {/* Círculo da Foto */}
+                <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-[450px] md:h-[450px] rounded-full border-[3px] border-slate-800 bg-slate-900 overflow-hidden shadow-2xl z-10">
+                   <img 
+                     src="/perfil.png" 
+                     onError={(e) => { e.currentTarget.src = "https://github.com/fatima-dachari.png" }}
+                     alt="Foto de Fátima Dachari" 
+                     className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500"
+                   />
+                </div>
+
+                {/* ATUALIZAÇÃO:
+                   Badge Tech (Direita Superior)
+                   Mobile: -top-4 (sobe bastante) e p-2 (menor padding)
+                   Desktop: top-12 e p-3
+                */}
+                <div className="absolute -top-4 sm:top-12 -right-0 sm:-right-8 bg-slate-900/90 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3 animate-pulse scale-90 sm:scale-100">
+                   <div className="bg-cyan-500/20 p-2 rounded-lg">
+                      <Code2 size={24} className="text-cyan-400" />
+                   </div>
+                   <div>
+                      <p className="text-[10px] text-slate-400 font-mono">Status</p>
+                      <p className="text-sm font-bold text-white">Full-Stack Dev</p>
+                   </div>
+                </div>
+
+                 {/* ATUALIZAÇÃO:
+                   Badge Dados (Esquerda Inferior) 
+                   Mobile: -bottom-4 (desce bastante) e p-2
+                   Desktop: bottom-16 e p-3
+                 */}
+                 <div className="absolute -bottom-4 sm:bottom-16 -left-2 sm:-left-10 bg-slate-900/90 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3 scale-90 sm:scale-100">
+                   <div className="bg-purple-500/20 p-2 rounded-lg">
+                      <LineChart size={24} className="text-purple-400" />
+                   </div>
+                   <div>
+                      <p className="text-[10px] text-slate-400 font-mono">Foco</p>
+                      <p className="text-sm font-bold text-white">Data Science</p>
+                   </div>
+                </div>
+             </motion.div>
+          </motion.div>
+
+        </div>
       </header>
 
-      {/* Skills Section (Visual Minimalista) */}
-      <section className="bg-slate-900/50 py-20">
-        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <SkillCard icon={<Code2 />} title="Front-end" desc="React, Next.js, TS" />
-          <SkillCard icon={<Database />} title="Back-end" desc="Node, C#.NET, SQL" />
-          <SkillCard icon={<Smartphone />} title="Mobile" desc=".NET MAUI, Android" />
-          <SkillCard icon={<Layout />} title="Data Science" desc="Python, Pandas, ML" />
+      {/* 2. About Me & Toolbox */}
+      <section className="container mx-auto px-6 py-24 border-y border-slate-900 bg-slate-900/10">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg blur opacity-20"></div>
+              <div className="relative bg-slate-950 p-8 rounded-lg border border-slate-800">
+                <Code2 className="text-cyan-400 mb-4" size={40} />
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  A Intersecção entre Código e Dados
+                </h3>
+                <p className="text-slate-400 leading-relaxed mb-4">
+                  Minha trajetória é definida pela expansão contínua. Comecei construindo para a web, expandi para o ecossistema mobile e agora mergulho na inteligência de dados.
+                </p>
+                <p className="text-slate-400 leading-relaxed">
+                  Busco uma <strong>visão 360º</strong>: acredito que a verdadeira inovação acontece conectando interfaces bem construídas à inteligência dos dados. Não apenas entrego software; entrego soluções estrategicamente inteligentes.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6 pl-0 md:pl-8"
+          >
+            <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <Terminal size={20} className="text-cyan-400"/> 
+              Ferramentas & DevOps
+            </h4>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {tools.map((tool, idx) => (
+                <div key={idx} className="flex items-center gap-3 bg-slate-900 p-3 rounded border border-slate-800 text-sm text-slate-300 hover:border-cyan-500/30 hover:text-cyan-400 transition-colors">
+                  <span className="text-cyan-500/80">{tool.icon}</span>
+                  <span>{tool.name}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* 3. Projects Section */}
       <section className="container mx-auto px-6 py-24" id="projetos">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <h3 className="text-3xl font-bold text-white flex items-center gap-2">
-            <span className="text-cyan-400">/</span> Projetos Selecionados
+            <span className="text-cyan-400">01.</span> Projetos Selecionados
           </h3>
           
-          {/* Filtros */}
-          <div className="flex gap-2 overflow-x-auto pb-2 mt-6 md:mt-0">
+          <div className="flex flex-wrap gap-2 justify-start md:justify-end mt-6 md:mt-0">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -128,74 +327,273 @@ export default function Portfolio() {
         {/* Grid de Projetos */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="min-h-[300px]"
         >
-          {filteredProjects.map((project) => (
-            <motion.div
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              key={project.id}
-              className="group bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.15)] flex flex-col justify-between h-full"
-            >
-              <div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-xs font-mono text-cyan-400 border border-cyan-900 bg-cyan-950/30 px-2 py-1 rounded">
-                    {project.category}
-                  </span>
-                  <div className="flex gap-3">
-                    {project.repoUrl && (
-                      <a href={project.repoUrl} target="_blank" className="text-slate-400 hover:text-white transition-colors" title="Ver Código">
-                        <Github size={20} />
-                      </a>
-                    )}
-                    {project.deployUrl && (
-                      <a href={project.deployUrl} target="_blank" className="text-slate-400 hover:text-white transition-colors" title="Ver Projeto">
-                        <ExternalLink size={20} />
-                      </a>
-                    )}
+          {filteredProjects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProjects.map((project) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  key={project.id}
+                  className="group bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.15)] flex flex-col justify-between h-full"
+                >
+                  <div>
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="text-xs font-mono text-cyan-400 border border-cyan-900 bg-cyan-950/30 px-2 py-1 rounded">
+                        {project.category}
+                      </span>
+                      <div className="flex gap-3">
+                        {project.repoUrl && (
+                          <a href={project.repoUrl} target="_blank" className="text-slate-400 hover:text-white transition-colors" title="Ver Código">
+                            <Github size={20} />
+                          </a>
+                        )}
+                        {project.deployUrl && (
+                          <a href={project.deployUrl} target="_blank" className="text-slate-400 hover:text-white transition-colors" title="Ver Projeto">
+                            <ExternalLink size={20} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                      {project.title}
+                    </h4>
+                    <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                      {project.description}
+                    </p>
                   </div>
-                </div>
-                
-                <h4 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                  {project.title}
-                </h4>
-                <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
 
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tech.map((tech) => (
-                  <span key={tech} className="text-xs text-slate-500 font-mono">
-                    #{tech}
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="text-xs text-slate-500 font-mono">
+                        #{tech}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex flex-col items-center justify-center py-20 text-center border border-dashed border-slate-800 rounded-xl bg-slate-900/20"
+            >
+              <div className="bg-slate-800 p-4 rounded-full mb-4 opacity-50">
+                <Code2 size={40} className="text-slate-400" />
+              </div>
+              <h4 className="text-xl font-bold text-slate-300 mb-2">Em breve...</h4>
+              <p className="text-slate-500 max-w-md">
+                Ainda não adicionei projetos nesta categoria específica aqui no portfólio, 
+                mas tenho experiência na área! Baixe meu currículo para ver mais detalhes.
+              </p>
+            </motion.div>
+          )}
+        </motion.div>
+      </section>
+
+      {/* 4. Skills Section */}
+      <section className="bg-slate-900/30 py-20 border-y border-slate-800/50">
+        <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <SkillCard icon={<Code2 />} title="Front-end" desc="React.js, Next.js, Tailwind, Vercel" />
+          <SkillCard icon={<Database />} title="Back-end" desc="Nest.js, Laravel, .NET, Postgres" />
+          <SkillCard icon={<Smartphone />} title="Mobile" desc=".NET MAUI, React Native" />
+          <SkillCard icon={<Layout />} title="Data Science" desc="Python" />
+        </div>
+      </section>
+
+      {/* 5. Experience Section */}
+      <section className="container mx-auto px-6 py-24">
+        <h3 className="text-3xl font-bold text-white mb-16 flex items-center gap-2">
+          <span className="text-cyan-400">02.</span> Experiência Profissional
+        </h3>
+        
+        <div className="relative border-l border-slate-800 ml-4 md:ml-6 space-y-12">
+          {experience.map((exp, index) => (
+            <motion.div 
+              key={exp.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="relative pl-8 md:pl-12"
+            >
+              {/* Dot on timeline */}
+              <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+              
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                <h4 className="text-xl font-bold text-white">
+                  {exp.role} <span className="text-cyan-400 font-mono text-sm ml-2">@ {exp.company}</span>
+                </h4>
+                <div className="flex items-center gap-2 text-slate-500 text-sm font-mono mt-1 md:mt-0">
+                  <Calendar size={14} />
+                  {exp.period}
+                </div>
+              </div>
+              
+              <p className="text-slate-400 leading-relaxed mb-4 w-full">
+                {exp.description}
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                {exp.tech.map(t => (
+                  <span key={t} className="text-xs text-slate-300 bg-slate-800/50 px-2 py-1 rounded border border-slate-700">
+                    {t}
                   </span>
                 ))}
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* 6. Education & Courses Section */}
+      <section className="bg-slate-900/20 py-24">
+        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16">
+          {/* Education */}
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
+              <span className="text-cyan-400">03.</span> Formação Acadêmica
+            </h3>
+            <div className="space-y-6">
+              {education.map((edu, idx) => (
+                <div key={idx} className="bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-cyan-500/30 transition-colors">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="text-white font-bold">{edu.degree}</h4>
+                      <p className="text-cyan-400 text-sm">{edu.institution}</p>
+                    </div>
+                    <GraduationCap className="text-slate-600" size={20} />
+                  </div>
+                  <p className="text-slate-500 text-sm font-mono mt-4">{edu.period}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Courses */}
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-2">
+              <span className="text-cyan-400">04.</span> Cursos & Certificações
+            </h3>
+            <div className="space-y-4">
+              {courses.map((course, idx) => (
+                <div key={idx} className="flex items-start gap-4 p-4 rounded-lg hover:bg-slate-900/50 transition-colors border border-transparent hover:border-slate-800">
+                  <div className="bg-cyan-500/10 p-2 rounded text-cyan-400 mt-1">
+                    <Award size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-sm">{course.name}</h4>
+                    <p className="text-slate-500 text-xs mb-1">{course.school}</p>
+                    <p className="text-slate-400 text-xs leading-relaxed">{course.details}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Diferenciais */}
+      <section className="container mx-auto px-6 py-24">
+        <h3 className="text-2xl font-bold text-white mb-12 flex items-center gap-2">
+          <span className="text-cyan-400">05.</span> Diferenciais
+        </h3>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {softSkills.map((skill, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-slate-900 to-slate-900/50 p-6 rounded-xl border border-slate-800 hover:border-cyan-500/30 transition-all group"
+            >
+              <div className="bg-cyan-500/10 w-12 h-12 rounded-lg flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-110 transition-transform">
+                {skill.icon}
+              </div>
+              <h4 className="text-lg font-bold text-white mb-2">{skill.title}</h4>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                {skill.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* 8. Contact & CTA Section */}
+      <section className="container mx-auto px-6 py-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
+        >
+          <h2 className="text-4xl font-bold text-white mb-6">Vamos construir algo incrível?</h2>
+          <p className="text-slate-400 text-lg mb-10">
+            Estou disponível para projetos full-stack e desafios que envolvam análise de dados. 
+            Se você busca alguém que une engenharia robusta com insights analíticos, vamos conversar.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* BOTÃO WHATSAPP */}
+            <a 
+              href="https://wa.me/55992210575" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]"
+            >
+              <Send size={20} />
+              Entrar em Contato
+            </a>
+            {/* BOTÃO CV */}
+            <a 
+              href="/cv-fatima-dachari.pdf" 
+              download
+              className="px-8 py-4 bg-transparent border border-slate-700 hover:border-white text-white font-bold rounded-full transition-all flex items-center justify-center gap-2 hover:bg-slate-900"
+            >
+              <Download size={20} />
+              Baixar Currículo
+            </a>
+          </div>
         </motion.div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 text-center text-slate-600 text-sm">
-        <p>© 2026 Fátima Dachari. Construído com Next.js & Tailwind.</p>
+      {/* 9. Footer */}
+      <footer className="py-12 text-center border-t border-slate-900 bg-slate-950">
+        <p className="text-slate-600 text-sm mb-2">© 2026 Fátima Dachari. All rights reserved.</p>
+        <p className="text-slate-700 text-xs">Built with Next.js, Tailwind & Framer Motion</p>
       </footer>
     </div>
   );
 }
 
-// Componente auxiliar para os Cards de Skill
 function SkillCard({ icon, title, desc }: { icon: any, title: string, desc: string }) {
   return (
-    <div className="flex flex-col items-center p-4">
-      <div className="bg-slate-800 p-4 rounded-full mb-4 text-cyan-400">
+    <div className="flex flex-col items-center p-4 hover:-translate-y-2 transition-transform duration-300">
+      <div className="bg-slate-800 p-4 rounded-full mb-4 text-cyan-400 shadow-lg shadow-cyan-900/10">
         {icon}
       </div>
       <h4 className="font-bold text-white mb-1">{title}</h4>
       <p className="text-sm text-slate-500">{desc}</p>
     </div>
+  );
+}
+
+function SocialLink({ href, icon }: { href: string, icon: any }) {
+  return (
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="p-3 border border-slate-700 rounded-full hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
+    >
+      {icon}
+    </a>
   );
 }
