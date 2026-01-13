@@ -1,15 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { 
-  Github, ExternalLink, Linkedin, Mail, 
-  Code2, Database, Smartphone, Layout, 
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Github, ExternalLink, Linkedin, Mail,
+  Code2, Database, Smartphone, Layout,
   Calendar, GraduationCap, Award, 
   HeartHandshake, LineChart, Globe,
-  Terminal, Palette, Download, Send,  Container, 
-  RefreshCw, Triangle, TrainFront 
+  Terminal, Palette, Download, Send, 
+  Container, RefreshCw, Triangle, TrainFront,
+  Menu, X 
 } from "lucide-react";
+
+const navLinks = [
+  { name: "Sobre", href: "#about" },
+  { name: "Projetos", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experiência", href: "#experience" },
+  { name: "Formação", href: "#education" },
+  { name: "Contato", href: "#contact" },
+];
 
 const experience = [
   {
@@ -17,7 +27,7 @@ const experience = [
     company: "JCSx Sistemas",
     role: "Desenvolvedora de Software",
     period: "Jul 2024 - Atual",
-    description: "Liderança na reescrita completa de app legado para .NET MAUI e desenvolvimento de módulos fiscais/operacionais em React.js/Next.js. Atuação em QA e Customer Success.",
+    description: "Liderança na reescrita completa de app legado em Java para .NET MAUI e desenvolvimento de módulos fiscais/operacionais em React.js/Next.js. Atuação em QA e Customer Success.",
     tech: [".NET MAUI", "C#", "React.js", "Zebra Integrations"]
   },
   {
@@ -77,8 +87,8 @@ const projects = [
     category: "Fullstack",
     description: "Sistema de monitoramento de criptomoedas com alertas em tempo real.",
     tech: ["React.js", ".NET", "Redis", "RabbitMQ", "SendGrid"],
-    repoUrl: "https://github.com/fatimadachari/CryptoWatcher", 
-    deployUrl: null, 
+    repoUrl: "https://github.com/fatimadachari/CryptoWatcher",
+    deployUrl: null,
   },
   {
     id: 2,
@@ -87,7 +97,7 @@ const projects = [
     description: "SaaS para nutricionistas: gerenciamento de pacientes, cálculo automático de dietas e geração de PDFs profissionais.",
     tech: [".NET", "Next.js"],
     repoUrl: "https://github.com/fatimadachari/NutriPlan",
-    deployUrl: null, 
+    deployUrl: null,
   },
   {
     id: 3,
@@ -105,7 +115,7 @@ const projects = [
     description: "API RESTful para gerenciamento de reembolsos corporativos.",
     tech: [".NET", "SQLServer"],
     repoUrl: "https://github.com/fatimadachari/CorpExpense",
-    deployUrl: null, 
+    deployUrl: null,
   },
   {
     id: 5,
@@ -114,7 +124,34 @@ const projects = [
     description: "Módulo de ML para previsão de preços de Bitcoin utilizando séries temporais e análise de volatilidade.",
     tech: ["Python", "Prophet", "Plotly", "Pandas", "YFinance"],
     repoUrl: "https://github.com/fatimadachari/crypto-trend-predictor",
-    deployUrl: null, 
+    deployUrl: null,
+  },
+  {
+    id: 6,
+    title: "Mini Projetos",
+    category: "Front-end",
+    description: "Coleção de mini projetos desenvolvidos com React e Vite. Demonstra habilidades através de utilitários práticos como Calculadora de IMC, Regra de Três, Cronômetro e mais.",
+    tech: ["JavaScript", "React.js"],
+    repoUrl: "https://github.com/fatimadachari/mini-projetos",
+    deployUrl: "https://fatimadachari.github.io/mini-projetos/",
+  },
+  {
+    id: 7,
+    title: "Quiz de JavaScript",
+    category: "Front-end",
+    description: "Uma aplicação interativa para testar conceitos da linguagem. Desenvolvido com foco no aprendizado, inspirado por Matheus Battisti.",
+    tech: ["JavaScript", "React.js"],
+    repoUrl: "https://github.com/fatimadachari/quiz",
+    deployUrl: "https://fatimadachari.github.io/quiz",
+  },
+  {
+    id: 8,
+    title: "MarchJSChallenge",
+    category: "Front-end",
+    description: "Uma jornada de 31 dias criando 31 projetos em JavaScript. O desafio evolui dos fundamentos a técnicas avançadas, com exemplos práticos de desenvolvimento front-end e jogos.",
+    tech: ["JavaScript", "HTML5", "CSS3"],
+    repoUrl: "https://github.com/fatimadachari/march-js-challenge",
+    deployUrl: "https://fatimadachari.github.io/march-js-challenge",
   },
 ];
 
@@ -158,20 +195,78 @@ const categories = ["Todos", "Front-end", "Backend", "Fullstack", "Mobile", "Dad
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("Todos");
+  const [isNavOpen, setIsNavOpen] = useState(false); // Estado para o menu mobile
 
-  const filteredProjects = projects.filter(project => 
+  const filteredProjects = projects.filter(project =>
     activeCategory === "Todos" ? true : project.category === activeCategory
   );
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-cyan-500 selection:text-black font-sans scroll-smooth overflow-x-hidden">
-      
+
+      {/* --- 0. NAVBAR FIXA --- */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+
+          {/* Logo / Nome */}
+          <a href="#" className="text-xl font-bold text-white tracking-tight hover:text-cyan-400 transition-colors">
+            Fátima<span className="text-cyan-400">.</span>
+          </a>
+
+          {/* Menu Desktop */}
+          <div className="hidden md:flex gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Botão Mobile */}
+          <button
+            className="md:hidden text-slate-300 hover:text-white"
+            onClick={() => setIsNavOpen(!isNavOpen)}
+          >
+            {isNavOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Menu Mobile (Dropdown) */}
+        <AnimatePresence>
+          {isNavOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-slate-950 border-b border-slate-800 overflow-hidden"
+            >
+              <div className="flex flex-col p-6 gap-6">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsNavOpen(false)} // Fecha ao clicar
+                    className="text-lg font-medium text-slate-300 hover:text-cyan-400 transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
       {/* 1. Header / Hero Section */}
-      <header className="container mx-auto px-6 py-12 md:py-24 flex items-center min-h-[90vh]">
+      <header className="container mx-auto px-6 py-32 md:py-40 flex items-center min-h-[90vh]" id="home">
         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
-          
+
           {/* Coluna de Texto (ESQUERDA) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -182,16 +277,16 @@ export default function Portfolio() {
               OLÁ, EU SOU
             </p>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight leading-tight">
-              Fátima <br/> Dachari.
+              Fátima <br /> Dachari.
             </h1>
             <h2 className="text-2xl md:text-4xl font-bold text-slate-400 mb-8">
               Engenharia de Software <br /> & Ciência de Dados.
             </h2>
             <p className="max-w-xl text-lg text-slate-400 leading-relaxed mb-10 border-l-2 border-slate-800 pl-6">
-              Desenvolvedora Full-Stack transformando ideias complexas em software de alto impacto. 
+              Desenvolvedora Full-Stack transformando ideias complexas em software de alto impacto.
               Construo ecossistemas digitais que unem uma engenharia sólida à inteligência estratégica de dados.
             </p>
-            
+
             <div className="flex gap-4">
               <SocialLink href="https://github.com/fatimadachari" icon={<Github size={24} />} />
               <SocialLink href="https://www.linkedin.com/in/fatima-dachari" icon={<Linkedin size={24} />} />
@@ -200,73 +295,63 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Coluna da Foto (DIREITA) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             className="order-1 md:order-2 flex justify-center md:justify-end relative"
           >
-             <motion.div
-               animate={{ y: [0, -15, 0] }}
-               transition={{ 
-                 duration: 6, 
-                 repeat: Infinity, 
-                 ease: "easeInOut" 
-               }}
-               className="relative"
-             >
-                {/* Efeito de Glow/Brilho */}
-                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full blur-2xl opacity-40"></div>
-                
-                {/* Círculo da Foto */}
-                <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-[450px] md:h-[450px] rounded-full border-[3px] border-slate-800 bg-slate-900 overflow-hidden shadow-2xl z-10">
-                   <img 
-                     src="/perfil.png" 
-                     onError={(e) => { e.currentTarget.src = "https://github.com/fatima-dachari.png" }}
-                     alt="Foto de Fátima Dachari" 
-                     className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500"
-                   />
-                </div>
+            <motion.div
+              animate={{ y: [0, -15, 0] }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="relative"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full blur-2xl opacity-40"></div>
 
-                {/* ATUALIZAÇÃO:
-                   Badge Tech (Direita Superior)
-                   Mobile: -top-4 (sobe bastante) e p-2 (menor padding)
-                   Desktop: top-12 e p-3
-                */}
-                <div className="absolute -top-4 sm:top-12 -right-0 sm:-right-8 bg-slate-900/90 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3 animate-pulse scale-90 sm:scale-100">
-                   <div className="bg-cyan-500/20 p-2 rounded-lg">
-                      <Code2 size={24} className="text-cyan-400" />
-                   </div>
-                   <div>
-                      <p className="text-[10px] text-slate-400 font-mono">Status</p>
-                      <p className="text-sm font-bold text-white">Full-Stack Dev</p>
-                   </div>
-                </div>
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-[450px] md:h-[450px] rounded-full border-[3px] border-slate-800 bg-slate-900 overflow-hidden shadow-2xl z-10">
+                <img
+                  src="/perfil.png"
+                  onError={(e) => { e.currentTarget.src = "https://github.com/fatima-dachari.png" }}
+                  alt="Foto de Fátima Dachari"
+                  className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500"
+                />
+              </div>
 
-                 {/* ATUALIZAÇÃO:
-                   Badge Dados (Esquerda Inferior) 
-                   Mobile: -bottom-4 (desce bastante) e p-2
-                   Desktop: bottom-16 e p-3
-                 */}
-                 <div className="absolute -bottom-4 sm:bottom-16 -left-2 sm:-left-10 bg-slate-900/90 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3 scale-90 sm:scale-100">
-                   <div className="bg-purple-500/20 p-2 rounded-lg">
-                      <LineChart size={24} className="text-purple-400" />
-                   </div>
-                   <div>
-                      <p className="text-[10px] text-slate-400 font-mono">Foco</p>
-                      <p className="text-sm font-bold text-white">Data Science</p>
-                   </div>
+              {/* Badge Tech */}
+              <div className="absolute -top-4 sm:top-12 -right-0 sm:-right-8 bg-slate-900/90 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3 animate-pulse scale-90 sm:scale-100">
+                <div className="bg-cyan-500/20 p-2 rounded-lg">
+                  <Code2 size={24} className="text-cyan-400" />
                 </div>
-             </motion.div>
+                <div>
+                  <p className="text-[10px] text-slate-400 font-mono">Status</p>
+                  <p className="text-sm font-bold text-white">Full-Stack Dev</p>
+                </div>
+              </div>
+
+              {/* Badge Dados */}
+              <div className="absolute -bottom-4 sm:bottom-16 -left-2 sm:-left-10 bg-slate-900/90 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-slate-700 shadow-xl z-20 flex items-center gap-3 scale-90 sm:scale-100">
+                <div className="bg-purple-500/20 p-2 rounded-lg">
+                  <LineChart size={24} className="text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-400 font-mono">Foco</p>
+                  <p className="text-sm font-bold text-white">Data Science</p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
         </div>
       </header>
 
       {/* 2. About Me & Toolbox */}
-      <section className="container mx-auto px-6 py-24 border-y border-slate-900 bg-slate-900/10">
+      <section className="container mx-auto px-6 py-24 border-y border-slate-900 bg-slate-900/10" id="about">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -288,14 +373,14 @@ export default function Portfolio() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-6 pl-0 md:pl-8"
           >
             <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <Terminal size={20} className="text-cyan-400"/> 
+              <Terminal size={20} className="text-cyan-400" />
               Ferramentas & DevOps
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -311,20 +396,20 @@ export default function Portfolio() {
       </section>
 
       {/* 3. Projects Section */}
-      <section className="container mx-auto px-6 py-24" id="projetos">
+      <section className="container mx-auto px-6 py-24" id="projects">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <h3 className="text-3xl font-bold text-white flex items-center gap-2">
             <span className="text-cyan-400">01.</span> Projetos Selecionados
           </h3>
-          
+
           <div className="flex flex-wrap gap-2 justify-start md:justify-end mt-6 md:mt-0">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap
-                  ${activeCategory === cat 
-                    ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/50" 
+                  ${activeCategory === cat
+                    ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/50"
                     : "text-slate-400 hover:text-white hover:bg-slate-800"}`}
               >
                 {cat}
@@ -334,7 +419,7 @@ export default function Portfolio() {
         </div>
 
         {/* Grid de Projetos */}
-        <motion.div 
+        <motion.div
           layout
           className="min-h-[300px]"
         >
@@ -368,7 +453,7 @@ export default function Portfolio() {
                         )}
                       </div>
                     </div>
-                    
+
                     <h4 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
                       {project.title}
                     </h4>
@@ -388,7 +473,7 @@ export default function Portfolio() {
               ))}
             </div>
           ) : (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex flex-col items-center justify-center py-20 text-center border border-dashed border-slate-800 rounded-xl bg-slate-900/20"
@@ -398,7 +483,7 @@ export default function Portfolio() {
               </div>
               <h4 className="text-xl font-bold text-slate-300 mb-2">Em breve...</h4>
               <p className="text-slate-500 max-w-md">
-                Ainda não adicionei projetos nesta categoria específica aqui no portfólio, 
+                Ainda não adicionei projetos nesta categoria específica aqui no portfólio,
                 mas tenho experiência na área! Baixe meu currículo para ver mais detalhes.
               </p>
             </motion.div>
@@ -407,24 +492,24 @@ export default function Portfolio() {
       </section>
 
       {/* 4. Skills Section */}
-      <section className="bg-slate-900/30 py-20 border-y border-slate-800/50">
+      <section className="bg-slate-900/30 py-20 border-y border-slate-800/50" id="skills">
         <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <SkillCard icon={<Code2 />} title="Front-end" desc="React.js, Next.js, Tailwind, Vercel" />
+          <SkillCard icon={<Code2 />} title="Front-end" desc="React.js, Next.js, Tailwind" />
           <SkillCard icon={<Database />} title="Back-end" desc="Nest.js, Laravel, .NET, Postgres" />
           <SkillCard icon={<Smartphone />} title="Mobile" desc=".NET MAUI, React Native" />
-          <SkillCard icon={<Layout />} title="Data Science" desc="Python" />
+          <SkillCard icon={<Layout />} title="Data Science" desc="Python, Pandas, ML" />
         </div>
       </section>
 
       {/* 5. Experience Section */}
-      <section className="container mx-auto px-6 py-24">
+      <section className="container mx-auto px-6 py-24" id="experience">
         <h3 className="text-3xl font-bold text-white mb-16 flex items-center gap-2">
           <span className="text-cyan-400">02.</span> Experiência Profissional
         </h3>
-        
+
         <div className="relative border-l border-slate-800 ml-4 md:ml-6 space-y-12">
           {experience.map((exp, index) => (
-            <motion.div 
+            <motion.div
               key={exp.id}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -434,7 +519,7 @@ export default function Portfolio() {
             >
               {/* Dot on timeline */}
               <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
-              
+
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                 <h4 className="text-xl font-bold text-white">
                   {exp.role} <span className="text-cyan-400 font-mono text-sm ml-2">@ {exp.company}</span>
@@ -444,11 +529,11 @@ export default function Portfolio() {
                   {exp.period}
                 </div>
               </div>
-              
+
               <p className="text-slate-400 leading-relaxed mb-4 w-full">
                 {exp.description}
               </p>
-              
+
               <div className="flex flex-wrap gap-2">
                 {exp.tech.map(t => (
                   <span key={t} className="text-xs text-slate-300 bg-slate-800/50 px-2 py-1 rounded border border-slate-700">
@@ -462,7 +547,7 @@ export default function Portfolio() {
       </section>
 
       {/* 6. Education & Courses Section */}
-      <section className="bg-slate-900/20 py-24">
+      <section className="bg-slate-900/20 py-24" id="education">
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16">
           {/* Education */}
           <div>
@@ -512,7 +597,7 @@ export default function Portfolio() {
         <h3 className="text-2xl font-bold text-white mb-12 flex items-center gap-2">
           <span className="text-cyan-400">05.</span> Diferenciais
         </h3>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {softSkills.map((skill, idx) => (
             <motion.div
@@ -536,7 +621,7 @@ export default function Portfolio() {
       </section>
 
       {/* 8. Contact & CTA Section */}
-      <section className="container mx-auto px-6 py-24 text-center">
+      <section className="container mx-auto px-6 py-24 text-center" id="contact">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -545,14 +630,14 @@ export default function Portfolio() {
         >
           <h2 className="text-4xl font-bold text-white mb-6">Vamos construir algo incrível?</h2>
           <p className="text-slate-400 text-lg mb-10">
-            Estou disponível para projetos full-stack e desafios que envolvam análise de dados. 
+            Estou disponível para projetos full-stack e desafios que envolvam análise de dados.
             Se você busca alguém que une engenharia robusta com insights analíticos, vamos conversar.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {/* BOTÃO WHATSAPP */}
-            <a 
-              href="https://wa.me/55992210575" 
+            <a
+              href="https://wa.me/55992210575"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-full transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]"
@@ -561,8 +646,8 @@ export default function Portfolio() {
               Entrar em Contato
             </a>
             {/* BOTÃO CV */}
-            <a 
-              href="/cv-fatima-dachari.pdf" 
+            <a
+              href="/cv-fatima-dachari.pdf"
               download
               className="px-8 py-4 bg-transparent border border-slate-700 hover:border-white text-white font-bold rounded-full transition-all flex items-center justify-center gap-2 hover:bg-slate-900"
             >
@@ -582,6 +667,8 @@ export default function Portfolio() {
   );
 }
 
+// --- HELPER COMPONENTS ---
+
 function SkillCard({ icon, title, desc }: { icon: any, title: string, desc: string }) {
   return (
     <div className="flex flex-col items-center p-4 hover:-translate-y-2 transition-transform duration-300">
@@ -596,9 +683,9 @@ function SkillCard({ icon, title, desc }: { icon: any, title: string, desc: stri
 
 function SocialLink({ href, icon }: { href: string, icon: any }) {
   return (
-    <a 
-      href={href} 
-      target="_blank" 
+    <a
+      href={href}
+      target="_blank"
       rel="noopener noreferrer"
       className="p-3 border border-slate-700 rounded-full hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
     >
