@@ -28,7 +28,7 @@ const experience = [
     role: "Desenvolvedora de Software",
     period: "Jul 2024 - Atual",
     description: "Liderança na reescrita completa de app legado em Java para .NET MAUI e desenvolvimento de módulos fiscais/operacionais em React.js/Next.js. Atuação em QA e Customer Success.",
-    tech: [".NET MAUI", "C#", "React.js", "Zebra Integrations"]
+    tech: [".NET MAUI", "Next.js", "Electron.js", "Zebra Integrations"]
   },
   {
     id: 2,
@@ -43,8 +43,8 @@ const experience = [
     company: "Farol Software",
     role: "Desenvolvedora de Software",
     period: "Jan 2022 - Mar 2023",
-    description: "Modernização de sites com PHP Laravel e criação de App Corporativo de Ponto Eletrônico usando Nest.js e React.",
-    tech: ["PHP/Laravel", "Nest.js", "TypeScript", "MySQL"]
+    description: "Modernização de sites com PHP Laravel e criação de App Corporativo de Ponto Eletrônico usando NestJS e React.",
+    tech: ["PHP/Laravel", "NestJS", "TypeScript", "MySQL"]
   },
   {
     id: 4,
@@ -104,7 +104,7 @@ const projects = [
     title: "SmartCondo",
     category: "Fullstack",
     description: "Plataforma SaaS Full-stack para gestão inteligente de condomínios.",
-    tech: ["Next.js", "Nest.js", "Prisma", "PostgreSQL"],
+    tech: ["Next.js", "NestJS", "Prisma", "PostgreSQL"],
     repoUrl: "https://github.com/fatimadachari/smart-condo",
     deployUrl: "https://smart-condo.vercel.app/",
   },
@@ -153,6 +153,42 @@ const projects = [
     repoUrl: "https://github.com/fatimadachari/march-js-challenge",
     deployUrl: "https://fatimadachari.github.io/march-js-challenge",
   },
+   {
+    id: 9,
+    title: "BarcodeScanner App",
+    category: "Mobile & Desktop",
+    description: "Aplicativo mobile corporativo com integração a coletores de dados Zebra.",
+    tech: [".NET MAUI", "LiteDB", "Zebra Hardware"],
+    repoUrl: null,
+    deployUrl: null,
+  },
+   {
+    id: 10,
+    title: "MaxControle Web",
+    category: "Front-end",
+    description: "Sistema web ERP para gestão de vendas, financeiro e estoque.",
+    tech: ["Next.js", "Tailwind", "shadcn/ui"],
+    repoUrl: null,
+    deployUrl: null,
+  },
+   {
+    id: 11,
+    title: "MaxControle Desktop",
+    category: "Mobile & Desktop",
+    description: "Sistema desktop ERP com módulo de Ponto de Venda (PDV).",
+    tech: ["Electron.js", "React.js", "shadcn/ui"],
+    repoUrl: null,
+    deployUrl: null,
+  },
+  {
+    id: 12,
+    title: "FocusGoals",
+    category: "Fullstack",
+    description: "Extensão de produtividade que combina Pomodoro timer, bloqueio de sites e rastreamento de metas diárias.",
+    tech: ["HTML", "CSS", "JavaScript", "Manifest V3", "Chrome Extensions AP"],
+    repoUrl: "https://github.com/fatimadachari/focusgoals-extension",
+    deployUrl: null,
+  },
 ];
 
 const softSkills = [
@@ -182,7 +218,6 @@ const tools = [
   { name: "Vercel", icon: <Triangle size={18} /> },
   { name: "Railway", icon: <TrainFront size={18} /> },
   { name: "Neon DB", icon: <Database size={18} /> },
-  { name: "MySQL", icon: <Database size={18} /> },
   { name: "PostgreSQL", icon: <Database size={18} /> },
   { name: "Docker", icon: <Container size={18} /> },
   { name: "CI/CD", icon: <RefreshCw size={18} /> },
@@ -191,7 +226,7 @@ const tools = [
   { name: "Zebra Hardware", icon: <Smartphone size={18} /> },
 ];
 
-const categories = ["Todos", "Front-end", "Backend", "Fullstack", "Mobile", "Dados"];
+const categories = ["Todos", "Front-end", "Backend", "Fullstack", "Mobile & Desktop", "Dados"];
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -495,8 +530,8 @@ export default function Portfolio() {
       <section className="bg-slate-900/30 py-20 border-y border-slate-800/50" id="skills">
         <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <SkillCard icon={<Code2 />} title="Front-end" desc="React.js, Next.js, Tailwind" />
-          <SkillCard icon={<Database />} title="Back-end" desc="Nest.js, Laravel, .NET, Postgres" />
-          <SkillCard icon={<Smartphone />} title="Mobile" desc=".NET MAUI, React Native" />
+          <SkillCard icon={<Database />} title="Back-end" desc="NestJS, Laravel, .NET, Postgres" />
+          <SkillCard icon={<Smartphone />} title="Mobile & Desktop" desc=".NET MAUI, React Native, Electron.js" />
           <SkillCard icon={<Layout />} title="Data Science" desc="Python, Pandas, ML" />
         </div>
       </section>
